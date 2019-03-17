@@ -4,19 +4,19 @@
 #
 Name     : R-sgeostat
 Version  : 1.0.27
-Release  : 14
+Release  : 15
 URL      : https://cran.r-project.org/src/contrib/sgeostat_1.0-27.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/sgeostat_1.0-27.tar.gz
 Summary  : An Object-Oriented Framework for Geostatistical Modeling in S+
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+
-Requires: R-sgeostat-lib
-BuildRequires : clr-R-helpers
+Requires: R-sgeostat-lib = %{version}-%{release}
+BuildRequires : buildreq-R
 
 %description
-containing functions for variogram estimation, variogram fitting and kriging
-  as well as some plot functions. Written entirely in S, therefore works only
-  for small data sets in acceptable computing time.
+This is a R port of:
+##############################################################################
+An Object-oriented Framework for Geostatistical Modeling in S+
 
 %package lib
 Summary: lib components for the R-sgeostat package.
@@ -34,11 +34,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1521267714
+export SOURCE_DATE_EPOCH=1552797031
 
 %install
+export SOURCE_DATE_EPOCH=1552797031
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1521267714
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -73,8 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library sgeostat|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  sgeostat || :
 
 
 %files
@@ -101,10 +100,7 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/sgeostat/help/sgeostat.rdx
 /usr/lib64/R/library/sgeostat/html/00Index.html
 /usr/lib64/R/library/sgeostat/html/R.css
-/usr/lib64/R/library/sgeostat/libs/symbols.rds
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/R/library/sgeostat/libs/sgeostat.so
-/usr/lib64/R/library/sgeostat/libs/sgeostat.so.avx2
-/usr/lib64/R/library/sgeostat/libs/sgeostat.so.avx512
