@@ -4,7 +4,7 @@
 #
 Name     : R-sgeostat
 Version  : 1.0.27
-Release  : 24
+Release  : 25
 URL      : https://cran.r-project.org/src/contrib/sgeostat_1.0-27.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/sgeostat_1.0-27.tar.gz
 Summary  : An Object-Oriented Framework for Geostatistical Modeling in S+
@@ -14,9 +14,9 @@ Requires: R-sgeostat-lib = %{version}-%{release}
 BuildRequires : buildreq-R
 
 %description
-This is a R port of:
-##############################################################################
-An Object-oriented Framework for Geostatistical Modeling in S+
+containing functions for variogram estimation, variogram fitting and kriging
+  as well as some plot functions. Written entirely in S, therefore works only
+  for small data sets in acceptable computing time.
 
 %package lib
 Summary: lib components for the R-sgeostat package.
@@ -28,21 +28,22 @@ lib components for the R-sgeostat package.
 
 %prep
 %setup -q -c -n sgeostat
+cd %{_builddir}/sgeostat
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1552943152
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1589536672
 
 %install
-export SOURCE_DATE_EPOCH=1552943152
+export SOURCE_DATE_EPOCH=1589536672
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -68,12 +69,12 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc  sgeostat || :
+R CMD check --no-manual --no-examples --no-codoc sgeostat || :
 
 
 %files
