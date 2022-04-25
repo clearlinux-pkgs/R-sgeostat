@@ -4,7 +4,7 @@
 #
 Name     : R-sgeostat
 Version  : 1.0.27
-Release  : 39
+Release  : 40
 URL      : https://cran.r-project.org/src/contrib/sgeostat_1.0-27.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/sgeostat_1.0-27.tar.gz
 Summary  : An Object-Oriented Framework for Geostatistical Modeling in S+
